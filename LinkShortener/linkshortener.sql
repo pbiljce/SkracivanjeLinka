@@ -1,0 +1,19 @@
+DROP DATABASE IF EXISTS LinkShortener;
+
+CREATE DATABASE LinkShortener;
+
+USE LinkShortener;
+
+CREATE TABLE links(
+	links_id INT PRIMARY KEY AUTO_INCREMENT,
+    link_full VARCHAR(500) NOT NULL,
+    link_shorten VARCHAR(5),
+	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE clicks(
+	clicks_id INT PRIMARY KEY AUTO_INCREMENT,
+	link_shorten VARCHAR(5),
+	CONSTRAINT fk_clicks_links FOREIGN KEY (link_shorten) REFERENCES links(link_shorten) ON DELETE CASCADE,
+	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
